@@ -13,6 +13,11 @@
 			],
 			"properties": {
 				"Trigger name": "sample_order_processing"
+			},
+			"inputVariables": {
+				"names": ["orderDetails"]
+			},
+				"outputVariables": {
 			}
 		}
 	],

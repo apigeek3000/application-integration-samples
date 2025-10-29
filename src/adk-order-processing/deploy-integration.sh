@@ -61,9 +61,16 @@ echo "Installing integrationcli"
 curl -L https://raw.githubusercontent.com/GoogleCloudPlatform/application-integration-management-toolkit/main/downloadLatest.sh | sh -
 export PATH=$PATH:$HOME/.integrationcli/bin
 
-sed -i "s/replaceme@testing.com/$USER/g" src/sample_order_processing.json
-sed -i "s/PROJECT_ID/$PROJECT_ID/g" src/sample_order_processing.json
-sed -i "s/REGION/$REGION/g" src/sample_order_processing.json
-sed -i "s/PROJECT_ID/$PROJECT_ID/g" connectors/bq-orders.json
+if [[ "$(uname)" == "Darwin" ]]; then
+  sed -i '' "s/replaceme@testing.com/$USER/g" src/sample_order_processing.json
+  sed -i '' "s/PROJECT_ID/$PROJECT_ID/g" src/sample_order_processing.json
+  sed -i '' "s/REGION/$REGION/g" src/sample_order_processing.json
+  sed -i '' "s/PROJECT_ID/$PROJECT_ID/g" connectors/bq-orders.json
+else
+  sed -i "s/replaceme@testing.com/$USER/g" src/sample_order_processing.json
+  sed -i "s/PROJECT_ID/$PROJECT_ID/g" src/sample_order_processing.json
+  sed -i "s/REGION/$REGION/g" src/sample_order_processing.json
+  sed -i "s/PROJECT_ID/$PROJECT_ID/g" connectors/bq-orders.json
+fi
 
 integrationcli integrations apply -f . -p $PROJECT_ID -r $REGION -t $TOKEN -g --wait
