@@ -12,35 +12,39 @@ Ensure you have the following CLI utilities installed:
 ## Step 1: Configure `env.sh`
 
 1. Copy the environment variables template:
-   ```bash
-   cd superdemo
-   cp env.example.sh env.sh
-   ```
+```bash
+cd superdemo
+cp env.example.sh env.sh
+```
 2. Open `env.sh` in your text editor and update the following properties:
    - `PROJECT_ID`: Set to your active GCP Project ID.
    - `REGION`: Set to your closest supported Application Integration region (e.g., `us-central1` or `europe-west1`).
+3. Source your env file:
+```bash
+source env.sh
+```
 
 ## Step 2: Initialize gcloud & Configure Credentials
 
 Configure and authenticate your Google Cloud SDK environment by running the following commands:
 
 1. **Initialize gcloud SDK** (if you have not done so or need to configure a new profile):
-   ```bash
-   gcloud init
-   ```
+```bash
+gcloud init
+```
 
 2. **Authenticate Application Default Credentials (ADC)**:
    The `integrationcli` tool uses Google's standard Application Default Credentials to securely authorize deployments:
-   ```bash
-   gcloud auth application-default login
-   ```
+```bash
+gcloud auth application-default login
+```
    This will open a browser window and request access to your GCP account.
 
 3. **Set Quota Project for ADC**:
    Set your target project as the billing/quota project for ADC calls to ensure proper API permission evaluation:
-   ```bash
-   gcloud auth application-default set-quota-project $PROJECT_ID
-   ```
+```bash
+gcloud auth application-default set-quota-project $PROJECT_ID
+```
 
 ## Step 3: Run Automatic Project Setup
 
